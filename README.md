@@ -30,6 +30,10 @@ as an embed it would become a tag as
 (the query is expanded to be attributes, as with all embedding
 elements href becomes `src`, link-text becomes alt-text)
 
+Using the title field means that markdown renderers that do not
+support `markembed` will simply show the embeds as links,
+which may still be useful.
+
 ## embed types built into html
 
 * image
