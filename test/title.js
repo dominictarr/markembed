@@ -1,13 +1,26 @@
 var URL = require('url')
+var parse = require('../parse')
 
 var inputs = [
   'video',
-  'code?line=22&lang=js'
+  'image',
+  'audio',
+  'iframe',
+  'x-code?line=22&lang=js',
+  'x-withnum1'
 ]
 
-function parse (str) {
-  var url = URL.parse(str)
-  console.log(url)
-}
+var title = [
+  'Assyrian people',
+  'Refugees'
+]
 
-inputs.map(parse)
+console.log(inputs.map(parse))
+
+
+
+
+
+
+
+

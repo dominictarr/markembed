@@ -1,26 +1,44 @@
 var marked = require('marked')
-var h = require('hyperscript')
+var parse = require('./parse')
+var QS = require('qs')
 
-var render = new Marked.Renderer()
-
-render.link = function (href, title, text) {
-  var p = URL.parse(title)
-  var attrs = qs.parse(p.query)
-  var opts = {href: '#/'+p.pathname+'/'+href + attrs.query}
-
-  return h('anchor', opts, text).outerHTML.toString()
+function element(tag, attrs, text) {
+  var s = '<'+tag
+  for(var k in attrs)
+    s += ' ' + k + '='+JSON.stringify(attrs[k])
+  if(text)
+    s += '>'+text+'</'+tag+'>'
+  else
+    s += '/>'
+  return s
 }
 
-render.image = function (src, title, text) {
-  var p = URL.parse(title)
-  var attrs = qs.parse(p.query)
-  var tag = p.pathname || 'img'
+var renderer = new marked.Renderer()
+
+//renderer.link = function (href, title, text) {
+//  var p = parse(title)
+////  var opts = {href: '#/'+p.pathname+'/'+href + '?'+QS.stringify(attrs)}
+//
+//  var el = parse(title)
+//  var tag = el.tag || 'img'
+//  var attrs = el.attributes || {title: title}
+//  attrs.href = 
+//
+//  if(!attrs.title) delete attrs.title
+//
+//  return element('anchor', opts, text)
+//}
+
+renderer.image = function (src, title, text) {
+  var el = parse(title)
+  var tag = el.tag || 'img'
+  var attrs = el.attributes || {title: title}
   attrs.src = src
-  return h(p.pathname, attrs, text).outerHTML.toString()
+  attrs.alt = text
+  return element(tag, attrs)
 }
 
 module.exports = function (str) {
   return marked(str, {renderer: renderer})
 }
-
 
