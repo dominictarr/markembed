@@ -115,6 +115,13 @@ Since an app needs to load all the custom elements that it supports,
 it could set it's own config for how they might display
 when embedded or natural.
 
+## inspirations
+
+other modules that have explored into this space include
+
+* [NHQ/markdown-av](https://github.com/NHQ/markdown-av)
+* [mixmix/hypermarkdown](https://github.com/mixmix/hypermarkdown)
+
 ## License
 
 MIT
